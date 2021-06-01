@@ -39,7 +39,7 @@
 						<i class="fa fa-map-marker"></i>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="emplyid" placeholder="請輸入員工帳號" required>
+						<input type="text" class="form-control" id="emplyid" placeholder="請輸入員工帳號" data-original-title="" title="" required>
 						<i class="fa fa-user"></i>
 						
 					</div>
@@ -66,13 +66,18 @@
 		let sendButton = document.querySelector('button');
 
 function send() {
-  $("#loadingIMG").show();
+  
   let emplyid = document.querySelector('#emplyid').value;
   let location =  $('#location').val(); //獲取選中記錄的value值
   let locationNM = $('#location option:selected').text(); //獲取選中記錄的text值
-
-  $.ajax({
+  if(!emplyid){
+   $('#emplyid').addClass("error");
+  }else{
+   $("#loadingIMG").show();
+   $('#emplyid').removeClass("error");
+     $.ajax({
     url: "https://script.google.com/macros/s/AKfycby6Jaa3wrbIXET0CvzhZEURpIXYmbez0P1BNC_EJf3auRgYLkY/exec",
+	//url:"https://script.google.com/macros/s/AKfycbyXVsjvgqMkHGRUKmzw7xq7VkAAaWT3DXQ45vpbAyUcKi_WM18/exec",
     data: {
         "emplyid": emplyid,
         "location": location,
@@ -85,6 +90,8 @@ function send() {
     },
   });
   
+  }
+
  
 };
 
